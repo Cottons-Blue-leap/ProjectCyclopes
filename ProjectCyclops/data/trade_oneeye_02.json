@@ -1,0 +1,70 @@
+{
+  "dialogue_id": "trade_oneeye_02",
+  "lines": [
+    {
+      "id": "start_first",
+      "speaker": "약초상 Lira",
+      "text": "어머, 외눈박이 손님! 어서 와. 나도 한쪽이야, 보이지?",
+      "next": "choice_first",
+      "conditions": { "flag_met_lira": false }
+    },
+    {
+      "id": "start_return",
+      "speaker": "약초상 Lira",
+      "text": "다시 왔네! 오늘은 좋은 약초가 들어왔어. ...라고 말하고 싶지만 아직이야.",
+      "next": "",
+      "conditions": { "flag_met_lira": true }
+    },
+    {
+      "id": "friendly_response",
+      "speaker": "약초상 Lira",
+      "text": "그렇지? 여기선 눈 하나라고 못 살 건 없어. 내가 증명이지.",
+      "next": "friendly_followup"
+    },
+    {
+      "id": "friendly_followup",
+      "speaker": "약초상 Lira",
+      "text": "쌍눈박이 약초상보다 내 눈이 더 정확해. 하나로 집중하니까!",
+      "next": ""
+    },
+    {
+      "id": "shy_response",
+      "speaker": "약초상 Lira",
+      "text": "부끄러워할 거 없어! 우리 눈 하나가 그들 눈 두 개만큼 빛나는걸.",
+      "next": ""
+    },
+    {
+      "id": "question_response",
+      "speaker": "약초상 Lira",
+      "text": "약초 장사! 쌍눈박이 마을에서 시작했는데, 여기가 제일 장사 잘 돼.",
+      "next": "question_followup"
+    },
+    {
+      "id": "question_followup",
+      "speaker": "약초상 Lira",
+      "text": "비결? 웃으면서 파는 거야. 눈이 하나여도 웃는 얼굴은 같으니까.",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "반가워! 여기 분위기 좋다.",
+          "next": "friendly_response",
+          "flags": { "flag_met_lira": true, "reputation_oneeye": 1 }
+        },
+        {
+          "text": "아, 네... 안녕하세요.",
+          "next": "shy_response",
+          "flags": { "flag_met_lira": true }
+        },
+        {
+          "text": "여기서 뭐 하는 거야?",
+          "next": "question_response",
+          "flags": { "flag_met_lira": true }
+        }
+      ]
+    }
+  }
+}

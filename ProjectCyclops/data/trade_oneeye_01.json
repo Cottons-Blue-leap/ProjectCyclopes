@@ -1,0 +1,64 @@
+{
+  "dialogue_id": "trade_oneeye_01",
+  "lines": [
+    {
+      "id": "start_first",
+      "speaker": "떠돌이 Kel",
+      "text": "...오? 나처럼 눈이 하나? 여기서 동족을 보다니 반갑다.",
+      "next": "choice_first",
+      "conditions": { "flag_met_kel": false }
+    },
+    {
+      "id": "start_return",
+      "speaker": "떠돌이 Kel",
+      "text": "또 보네. 이 교역소도 나쁘진 않지? 눈 하나라고 쫓아내진 않으니까.",
+      "next": "",
+      "conditions": { "flag_met_kel": true }
+    },
+    {
+      "id": "warm_response",
+      "speaker": "떠돌이 Kel",
+      "text": "그렇지? 여기 쌍눈박이들은 돈 앞에서는 차별도 안 해. 나쁘지 않아.",
+      "next": "warm_followup"
+    },
+    {
+      "id": "warm_followup",
+      "speaker": "떠돌이 Kel",
+      "text": "...물론 돈이 없으면 어디서든 차별당하지만. 하하.",
+      "next": ""
+    },
+    {
+      "id": "cautious_response",
+      "speaker": "떠돌이 Kel",
+      "text": "조심하는 거, 이해해. 나도 처음엔 그랬어. 근데 여긴 괜찮은 편이야.",
+      "next": ""
+    },
+    {
+      "id": "bitter_response",
+      "speaker": "떠돌이 Kel",
+      "text": "...그래, 쉽지 않지. 근데 여기까지 온 거면 대단한 거야. 진심으로.",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "나도 반가워. 여기 괜찮은 곳이네.",
+          "next": "warm_response",
+          "flags": { "flag_met_kel": true, "reputation_oneeye": 1 }
+        },
+        {
+          "text": "동족이라고 방심은 못 해.",
+          "next": "cautious_response",
+          "flags": { "flag_met_kel": true }
+        },
+        {
+          "text": "...여기까지 오느라 힘들었어.",
+          "next": "bitter_response",
+          "flags": { "flag_met_kel": true, "reputation_oneeye": 1 }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "dialogue_id": "villager_01",
+  "lines": [
+    {
+      "id": "start_first",
+      "speaker": "Miren",
+      "text": "어머, 외눈박이가 여길 다 오다니. 처음 보는 얼굴이네.",
+      "next": "choice_first",
+      "conditions": { "flag_met_miren": false }
+    },
+    {
+      "id": "start_hostile",
+      "speaker": "Miren",
+      "text": "...또 왔어? 뭘 원하는 거야.",
+      "next": "",
+      "conditions": { "flag_met_miren": true, "reputation_twoeye": -3 }
+    },
+    {
+      "id": "start_friendly",
+      "speaker": "Miren",
+      "text": "어, 아까 그 외눈박이! 다시 왔구나. 마을은 좀 둘러봤어?",
+      "next": "choice_return_friendly",
+      "conditions": { "flag_met_miren": true, "reputation_twoeye": 1 }
+    },
+    {
+      "id": "start_wary",
+      "speaker": "Miren",
+      "text": "아, 아까 그... 외눈박이. 뭐, 볼일 있어?",
+      "next": "choice_return_neutral",
+      "conditions": { "flag_met_miren": true }
+    },
+    {
+      "id": "neutral_response",
+      "speaker": "Miren",
+      "text": "그냥 지나가는 거라... 뭐, 별일 없으면 됐지.",
+      "next": ""
+    },
+    {
+      "id": "hostile_response",
+      "speaker": "Miren",
+      "text": "...훗. 성격 하나는 되게 세구나, 외눈박이 주제에.",
+      "next": ""
+    },
+    {
+      "id": "friendly_response",
+      "speaker": "Miren",
+      "text": "궁금한 거야? 여긴 그냥 평범한 마을이야. 뭐... 네 눈엔 다르게 보이려나.",
+      "next": "friendly_followup"
+    },
+    {
+      "id": "friendly_followup",
+      "speaker": "Miren",
+      "text": "...저기, 혹시 배고프면 광장 쪽 가게에 가봐. 좀 비싸긴 한데.",
+      "next": ""
+    },
+    {
+      "id": "return_neutral_response",
+      "speaker": "Miren",
+      "text": "...그래. 뭐, 조심해서 다녀.",
+      "next": ""
+    },
+    {
+      "id": "return_curious_response",
+      "speaker": "Miren",
+      "text": "많이 다른가? ...사실 나도 외눈박이는 처음 봐서 좀 신기하긴 해.",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "그냥 지나가는 길이야.",
+          "next": "neutral_response",
+          "flags": { "flag_met_miren": true }
+        },
+        {
+          "text": "네가 상관할 일이 아니지.",
+          "next": "hostile_response",
+          "flags": { "reputation_twoeye": -2, "flag_met_miren": true }
+        },
+        {
+          "text": "이 마을이 궁금했어.",
+          "next": "friendly_response",
+          "flags": { "reputation_twoeye": 1, "flag_met_miren": true, "flag_talked_miren_friendly": true }
+        }
+      ]
+    },
+    "choice_return_neutral": {
+      "options": [
+        {
+          "text": "별일 아니야.",
+          "next": "return_neutral_response",
+          "flags": {}
+        },
+        {
+          "text": "이 마을, 생각보다 흥미로운 곳이더라.",
+          "next": "return_curious_response",
+          "flags": { "reputation_twoeye": 1 }
+        }
+      ]
+    },
+    "choice_return_friendly": {
+      "options": [
+        {
+          "text": "응, 꽤 볼 게 많더라.",
+          "next": "return_curious_response",
+          "flags": { "reputation_twoeye": 1 }
+        },
+        {
+          "text": "아직 다 못 봤어.",
+          "next": "return_neutral_response",
+          "flags": {}
+        }
+      ]
+    }
+  }
+}

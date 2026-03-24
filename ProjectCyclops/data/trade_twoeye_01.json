@@ -1,0 +1,77 @@
+{
+  "dialogue_id": "trade_twoeye_01",
+  "lines": [
+    {
+      "id": "start_first",
+      "speaker": "상인 Doran",
+      "text": "어? 외눈박이네. 교역소에 온 건 처음이지?",
+      "next": "choice_first",
+      "conditions": { "flag_met_doran": false }
+    },
+    {
+      "id": "start_friendly",
+      "speaker": "상인 Doran",
+      "text": "오, 다시 왔구나. 장사가 잘 되면 손님은 가리지 않는 법이지.",
+      "next": "",
+      "conditions": { "flag_met_doran": true, "reputation_trade": 1 }
+    },
+    {
+      "id": "start_return",
+      "speaker": "상인 Doran",
+      "text": "뭐, 또 왔어? 살 거 있으면 빨리 말해.",
+      "next": "",
+      "conditions": { "flag_met_doran": true }
+    },
+    {
+      "id": "welcome_response",
+      "speaker": "상인 Doran",
+      "text": "그래, 여긴 누구든 물건만 있으면 환영이야. 눈이 몇 개든.",
+      "next": "welcome_followup"
+    },
+    {
+      "id": "welcome_followup",
+      "speaker": "상인 Doran",
+      "text": "...물론 눈이 하나면 좀 깎아줄 수 있다는 뜻은 아니야.",
+      "next": ""
+    },
+    {
+      "id": "sharp_response",
+      "speaker": "상인 Doran",
+      "text": "...성격 하나는 불같구만. 여기선 돈이 눈보다 중요해. 기억해둬.",
+      "next": ""
+    },
+    {
+      "id": "curious_response",
+      "speaker": "상인 Doran",
+      "text": "교역소? 눈이 하나든 둘이든 셋이든, 돈만 있으면 다 사는 곳이지.",
+      "next": "curious_followup"
+    },
+    {
+      "id": "curious_followup",
+      "speaker": "상인 Doran",
+      "text": "뭐, 셋은 좀 그렇겠지만. 하하.",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "좋은 곳이네. 구경 좀 할게.",
+          "next": "welcome_response",
+          "flags": { "flag_met_doran": true, "reputation_trade": 1 }
+        },
+        {
+          "text": "외눈박이가 오면 안 되는 곳이야?",
+          "next": "sharp_response",
+          "flags": { "flag_met_doran": true, "reputation_trade": -1 }
+        },
+        {
+          "text": "여긴 뭘 파는 데야?",
+          "next": "curious_response",
+          "flags": { "flag_met_doran": true }
+        }
+      ]
+    }
+  }
+}

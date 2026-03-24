@@ -1,0 +1,96 @@
+{
+  "dialogue_id": "villager_02",
+  "lines": [
+    {
+      "id": "start_first",
+      "speaker": "Seren",
+      "text": "...외눈박이? 하나, 둘... 진짜 하나네.",
+      "next": "seren_react",
+      "conditions": { "flag_met_seren": false }
+    },
+    {
+      "id": "start_hostile",
+      "speaker": "Seren",
+      "text": "...아, 너. ...미안, 아까는 내가 좀 그랬지.",
+      "next": "",
+      "conditions": { "flag_met_seren": true, "reputation_twoeye": -1 }
+    },
+    {
+      "id": "start_friend",
+      "speaker": "Seren",
+      "text": "오, 왔어! 아까 네가 한 말 생각해봤는데... 다르게 보인다는 거, 좀 멋있었어.",
+      "next": "friend_followup",
+      "conditions": { "flag_befriend_seren": true }
+    },
+    {
+      "id": "start_neutral",
+      "speaker": "Seren",
+      "text": "아, 또 보네. 마을 구경 잘 하고 있어?",
+      "next": "",
+      "conditions": { "flag_met_seren": true }
+    },
+    {
+      "id": "seren_react",
+      "speaker": "Seren",
+      "text": "한쪽 눈이면 불편하지 않아? 계단 내려갈 때 거리감 같은 거.",
+      "next": "choice_first"
+    },
+    {
+      "id": "calm_response",
+      "speaker": "Seren",
+      "text": "아, 그렇구나. 미안, 이상한 거 물어봐서.",
+      "next": "calm_followup"
+    },
+    {
+      "id": "calm_followup",
+      "speaker": "Seren",
+      "text": "그냥... 처음 봐서 궁금했어. 나쁜 뜻은 아니었어.",
+      "next": ""
+    },
+    {
+      "id": "sharp_response",
+      "speaker": "Seren",
+      "text": "...그건 그렇네. 미안.",
+      "next": ""
+    },
+    {
+      "id": "kind_response",
+      "speaker": "Seren",
+      "text": "...정말? 하하, 넌 좀 특이하다. 좋은 의미로.",
+      "next": "kind_followup"
+    },
+    {
+      "id": "kind_followup",
+      "speaker": "Seren",
+      "text": "나 Seren이야. 혹시 뭐 필요한 거 있으면 말해.",
+      "next": ""
+    },
+    {
+      "id": "friend_followup",
+      "speaker": "Seren",
+      "text": "나도 가끔 생각해. 눈이 두 개라고 더 잘 보는 건 아닌 것 같아. 보고 싶은 것만 보게 되니까.",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "익숙해져서 괜찮아.",
+          "next": "calm_response",
+          "flags": { "flag_met_seren": true }
+        },
+        {
+          "text": "눈이 두 개면 두 배로 잘 보여?",
+          "next": "sharp_response",
+          "flags": { "reputation_twoeye": -1, "flag_met_seren": true }
+        },
+        {
+          "text": "불편하긴 하지. 근데 그만큼 다른 게 잘 보여.",
+          "next": "kind_response",
+          "flags": { "reputation_twoeye": 2, "flag_met_seren": true, "flag_befriend_seren": true }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "dialogue_id": "hostile_02",
+  "lines": [
+    {
+      "id": "start_return",
+      "speaker": "차별주의자",
+      "text": "...뭐야, 또 왔어. 눈치도 없는 외눈박이라니.",
+      "next": "",
+      "conditions": { "flag_met_hostile_02": true }
+    },
+    {
+      "id": "start",
+      "speaker": "차별주의자",
+      "text": "외눈박이가 감히 여기를 어슬렁거려? 불쾌하군.",
+      "next": "choice_first"
+    },
+    {
+      "id": "calm_response",
+      "speaker": "차별주의자",
+      "text": "...체면치레는 할 줄 아는 모양이군. 꺼져.",
+      "next": ""
+    },
+    {
+      "id": "hostile_response",
+      "speaker": "차별주의자",
+      "text": "뭐라고?! 외눈박이 주제에 입은 살아있네!",
+      "next": "hostile_followup"
+    },
+    {
+      "id": "hostile_followup",
+      "speaker": "차별주의자",
+      "text": "한 수 가르쳐줘야겠어!",
+      "next": ""
+    },
+    {
+      "id": "avoid_response",
+      "speaker": "차별주의자",
+      "text": "그래, 그렇게 고개 숙이고 다니는 게 어울려.",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "문제를 일으킬 생각은 없어.",
+          "next": "calm_response",
+          "flags": { "flag_met_hostile_02": true }
+        },
+        {
+          "text": "네 눈이 두 개라서 뭐가 다른데?",
+          "next": "hostile_response",
+          "flags": { "flag_met_hostile_02": true, "flag_hostile_02_aggro": true, "reputation_twoeye": -2 }
+        },
+        {
+          "text": "(눈을 피한다)",
+          "next": "avoid_response",
+          "flags": { "flag_met_hostile_02": true }
+        }
+      ]
+    }
+  }
+}

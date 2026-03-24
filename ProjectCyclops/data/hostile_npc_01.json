@@ -1,0 +1,63 @@
+{
+  "dialogue_id": "hostile_01",
+  "lines": [
+    {
+      "id": "start_return",
+      "speaker": "차별주의자",
+      "text": "...또 왔어? 아까 그 외눈박이. 꼴도 보기 싫은데.",
+      "next": "",
+      "conditions": { "flag_met_hostile_01": true }
+    },
+    {
+      "id": "start",
+      "speaker": "차별주의자",
+      "text": "...뭐야, 외눈박이잖아. 여기까지 기어 올라왔어?",
+      "next": "choice_first"
+    },
+    {
+      "id": "calm_response",
+      "speaker": "차별주의자",
+      "text": "흥, 말은 점잖게 하네. 눈 하나 빠진 주제에.",
+      "next": ""
+    },
+    {
+      "id": "hostile_response",
+      "speaker": "차별주의자",
+      "text": "뭐? 감히 외눈박이가 나한테 대들어?!",
+      "next": "hostile_followup"
+    },
+    {
+      "id": "hostile_followup",
+      "speaker": "차별주의자",
+      "text": "...좋아, 그렇게 나오겠다 이거지. 두 눈의 힘을 보여주마!",
+      "next": ""
+    },
+    {
+      "id": "avoid_response",
+      "speaker": "차별주의자",
+      "text": "뭐야, 도망치는 거야? 역시 외눈박이는 겁쟁이라니까.",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "싸우고 싶지 않아. 그냥 지나갈게.",
+          "next": "calm_response",
+          "flags": { "flag_met_hostile_01": true }
+        },
+        {
+          "text": "눈이 두 개라고 잘난 척은.",
+          "next": "hostile_response",
+          "flags": { "flag_met_hostile_01": true, "flag_hostile_01_aggro": true, "reputation_twoeye": -2 }
+        },
+        {
+          "text": "(무시하고 지나간다)",
+          "next": "avoid_response",
+          "flags": { "flag_met_hostile_01": true }
+        }
+      ]
+    }
+  }
+}

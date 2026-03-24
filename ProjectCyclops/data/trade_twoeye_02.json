@@ -1,0 +1,65 @@
+{
+  "dialogue_id": "trade_twoeye_02",
+  "lines": [
+    {
+      "id": "start_first",
+      "speaker": "경비원 Hael",
+      "text": "...외눈박이? 여기 교역소에는 처음 보는 얼굴이군.",
+      "next": "choice_first",
+      "conditions": { "flag_met_hael": false }
+    },
+    {
+      "id": "start_friendly",
+      "speaker": "경비원 Hael",
+      "text": "문제 안 일으키면 괜찮아. 오늘도 조용히 다녀.",
+      "next": "",
+      "conditions": { "flag_met_hael": true, "reputation_trade": 1 }
+    },
+    {
+      "id": "start_return",
+      "speaker": "경비원 Hael",
+      "text": "...통행은 자유야. 이상한 짓만 안 하면.",
+      "next": "",
+      "conditions": { "flag_met_hael": true }
+    },
+    {
+      "id": "polite_response",
+      "speaker": "경비원 Hael",
+      "text": "...그래. 여긴 교역소니까 눈이 몇 개든 상관없어. 규칙만 지키면.",
+      "next": ""
+    },
+    {
+      "id": "defiant_response",
+      "speaker": "경비원 Hael",
+      "text": "통행증이 문제가 아니라, 태도가 문제야. 조심해.",
+      "next": ""
+    },
+    {
+      "id": "quiet_response",
+      "speaker": "경비원 Hael",
+      "text": "...말수가 적군. 뭐, 조용한 게 나쁠 건 없지.",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "문제 일으킬 생각 없어요.",
+          "next": "polite_response",
+          "flags": { "flag_met_hael": true, "reputation_trade": 1 }
+        },
+        {
+          "text": "통행증이라도 필요해?",
+          "next": "defiant_response",
+          "flags": { "flag_met_hael": true, "reputation_trade": -1 }
+        },
+        {
+          "text": "(고개를 끄덕인다)",
+          "next": "quiet_response",
+          "flags": { "flag_met_hael": true }
+        }
+      ]
+    }
+  }
+}
