@@ -1,0 +1,53 @@
+{
+  "dialogue_id": "trade_oneeye_04",
+  "lines": [
+    {
+      "id": "start_first",
+      "speaker": "점술사 Yenna",
+      "text": "...오는 걸 알고 있었어. 하나의 눈으로 보는 자가 올 줄.",
+      "next": "choice_first",
+      "conditions": { "flag_met_yenna": false }
+    },
+    {
+      "id": "start_return",
+      "speaker": "점술사 Yenna",
+      "text": "다시 왔구나. 운명의 흐름이 너를 이끄는 거야.",
+      "next": "",
+      "conditions": { "flag_met_yenna": true }
+    },
+    {
+      "id": "fortune_response",
+      "speaker": "점술사 Yenna",
+      "text": "너의 눈... 하나지만, 두 개보다 깊이 보는 눈이야. 앞으로 큰 선택이 올 거야.",
+      "next": "fortune_followup"
+    },
+    {
+      "id": "fortune_followup",
+      "speaker": "점술사 Yenna",
+      "text": "그 선택이 이 땅의 미래를 바꿀지도 몰라.",
+      "next": ""
+    },
+    {
+      "id": "dismiss_response",
+      "speaker": "점술사 Yenna",
+      "text": "...믿지 않아도 괜찮아. 운명은 믿는 자를 기다리지 않으니까.",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "...점을 봐 줘.",
+          "next": "fortune_response",
+          "flags": { "flag_met_yenna": true, "reputation_oneeye": 1 }
+        },
+        {
+          "text": "점술 같은 건 안 믿어.",
+          "next": "dismiss_response",
+          "flags": { "flag_met_yenna": true }
+        }
+      ]
+    }
+  }
+}

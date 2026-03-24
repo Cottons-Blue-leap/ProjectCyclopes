@@ -22,6 +22,7 @@ var windup_timer: float = 0.0
 var windup_progress: float = 0.0  # 0~1, 눈 게이지바용
 var hit_flash_timer: float = 0.0
 var is_hit: bool = false
+var facing_direction: Vector2 = Vector2.DOWN
 
 
 func _ready() -> void:
@@ -83,6 +84,7 @@ func _state_idle(delta: float) -> void:
 ## 배회 상태
 func _state_wander(delta: float) -> void:
 	velocity = wander_direction * move_speed
+	facing_direction = wander_direction
 	wander_timer -= delta
 	if wander_timer <= 0:
 		state = EnemyState.IDLE
@@ -106,6 +108,7 @@ func _state_chase() -> void:
 
 	var dir := (player.global_position - global_position).normalized()
 	velocity = dir * chase_speed
+	facing_direction = dir
 
 	if _player_in_range(attack_range):
 		state = EnemyState.ATTACK_WINDUP
@@ -190,11 +193,12 @@ func _draw() -> void:
 	var body_rect := Rect2(-24, -24, 48, 48)
 	draw_rect(body_rect, body_color)
 
-	# 눈 2개 (쌍눈박이 적)
-	draw_circle(Vector2(-8, -8), 6.0, Color.WHITE)
-	draw_circle(Vector2(8, -8), 6.0, Color.WHITE)
-	draw_circle(Vector2(-8, -8), 3.0, Color(0.1, 0.1, 0.1))
-	draw_circle(Vector2(8, -8), 3.0, Color(0.1, 0.1, 0.1))
+	# 눈 2개 — 바라보는 방향에 따라 오프셋
+	var eye_off := facing_direction * 4.0
+	draw_circle(Vector2(-8 + eye_off.x, -8 + eye_off.y), 6.0, Color.WHITE)
+	draw_circle(Vector2(8 + eye_off.x, -8 + eye_off.y), 6.0, Color.WHITE)
+	draw_circle(Vector2(-8 + eye_off.x, -8 + eye_off.y), 3.0, Color(0.1, 0.1, 0.1))
+	draw_circle(Vector2(8 + eye_off.x, -8 + eye_off.y), 3.0, Color(0.1, 0.1, 0.1))
 
 	# 눈 게이지바 (공격 예비 중)
 	if state == EnemyState.ATTACK_WINDUP:

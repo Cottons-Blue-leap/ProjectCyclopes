@@ -1,0 +1,47 @@
+{
+  "dialogue_id": "villager_06",
+  "lines": [
+    {
+      "id": "start_first",
+      "speaker": "아이 Pip",
+      "text": "우와! 진짜 외눈박이다! 눈이 진짜 하나야?",
+      "next": "choice_first",
+      "conditions": { "flag_met_pip": false }
+    },
+    {
+      "id": "start_return",
+      "speaker": "아이 Pip",
+      "text": "외눈박이 아저씨! 또 놀러 온 거야?",
+      "next": "",
+      "conditions": { "flag_met_pip": true }
+    },
+    {
+      "id": "nice_response",
+      "speaker": "아이 Pip",
+      "text": "와, 멋지다! 엄마가 외눈박이는 무섭다고 했는데, 전혀 안 무섭잖아!",
+      "next": ""
+    },
+    {
+      "id": "scary_response",
+      "speaker": "아이 Pip",
+      "text": "으... 무서워... 엄마가 맞았어...",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "응, 하나야. 신기하지?",
+          "next": "nice_response",
+          "flags": { "flag_met_pip": true, "reputation_twoeye": 1 }
+        },
+        {
+          "text": "...째려본다.",
+          "next": "scary_response",
+          "flags": { "flag_met_pip": true, "reputation_twoeye": -1 }
+        }
+      ]
+    }
+  }
+}

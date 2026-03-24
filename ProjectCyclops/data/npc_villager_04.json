@@ -1,0 +1,54 @@
+{
+  "dialogue_id": "villager_04",
+  "lines": [
+    {
+      "id": "start_first",
+      "speaker": "약사 Ellia",
+      "text": "어머... 외눈박이가 여기까지? 다친 곳은 없어?",
+      "next": "choice_first",
+      "conditions": { "flag_met_ellia": false }
+    },
+    {
+      "id": "start_friendly",
+      "speaker": "약사 Ellia",
+      "text": "아, 다시 왔구나. 약초가 필요하면 말해.",
+      "next": "",
+      "conditions": { "flag_met_ellia": true, "reputation_twoeye": 1 }
+    },
+    {
+      "id": "start_neutral",
+      "speaker": "약사 Ellia",
+      "text": "...또 왔네. 볼일 있어?",
+      "next": "",
+      "conditions": { "flag_met_ellia": true }
+    },
+    {
+      "id": "kind_response",
+      "speaker": "약사 Ellia",
+      "text": "다행이야. 요즘 물정이 험하니까... 혹시 필요한 약이 있으면 말해 줘.",
+      "next": ""
+    },
+    {
+      "id": "cold_response",
+      "speaker": "약사 Ellia",
+      "text": "...그, 그래. 미안. 괜한 참견이었어.",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "괜찮아, 걱정해줘서 고마워.",
+          "next": "kind_response",
+          "flags": { "flag_met_ellia": true, "reputation_twoeye": 1 }
+        },
+        {
+          "text": "걱정은 됐어.",
+          "next": "cold_response",
+          "flags": { "flag_met_ellia": true, "reputation_twoeye": -1 }
+        }
+      ]
+    }
+  }
+}

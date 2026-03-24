@@ -1,0 +1,47 @@
+{
+  "dialogue_id": "trade_twoeye_05",
+  "lines": [
+    {
+      "id": "start_first",
+      "speaker": "환전상 Breck",
+      "text": "환전이 필요한가? ...외눈박이라고 수수료를 더 받진 않으니 안심해.",
+      "next": "choice_first",
+      "conditions": { "flag_met_breck": false }
+    },
+    {
+      "id": "start_return",
+      "speaker": "환전상 Breck",
+      "text": "또 왔군. 이번엔 무슨 화폐를 가져왔어?",
+      "next": "",
+      "conditions": { "flag_met_breck": true }
+    },
+    {
+      "id": "business_response",
+      "speaker": "환전상 Breck",
+      "text": "좋지. 장사에 차별은 없어. 돈에는 눈이 안 달려있으니까. 하하.",
+      "next": ""
+    },
+    {
+      "id": "question_response",
+      "speaker": "환전상 Breck",
+      "text": "시세? 요즘 남쪽 금화가 좀 떨어졌어. 북쪽 은화가 안정적이지.",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "환전 좀 하고 싶어.",
+          "next": "business_response",
+          "flags": { "flag_met_breck": true, "reputation_twoeye": 1 }
+        },
+        {
+          "text": "요즘 시세가 어때?",
+          "next": "question_response",
+          "flags": { "flag_met_breck": true }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "dialogue_id": "villager_05",
+  "lines": [
+    {
+      "id": "start_first",
+      "speaker": "농부 Torren",
+      "text": "...헉. 외, 외눈박이?! 내 밭에서 뭐 하는 거야!",
+      "next": "choice_first",
+      "conditions": { "flag_met_torren": false }
+    },
+    {
+      "id": "start_calm",
+      "speaker": "농부 Torren",
+      "text": "아, 아까 그 외눈박이. 밭은 밟지 마.",
+      "next": "",
+      "conditions": { "flag_met_torren": true, "reputation_twoeye": 1 }
+    },
+    {
+      "id": "start_wary",
+      "speaker": "농부 Torren",
+      "text": "...또 왔어? 밭 근처에는 오지 마.",
+      "next": "",
+      "conditions": { "flag_met_torren": true }
+    },
+    {
+      "id": "calm_response",
+      "speaker": "농부 Torren",
+      "text": "...그래? 그럼 밭은 건드리지 마. 올해 수확이 중요하거든.",
+      "next": ""
+    },
+    {
+      "id": "angry_response",
+      "speaker": "농부 Torren",
+      "text": "뭐?! 이 외눈박이가 버릇이... 쯧.",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "그냥 지나가는 길이야. 밭은 안 건드릴게.",
+          "next": "calm_response",
+          "flags": { "flag_met_torren": true, "reputation_twoeye": 1 }
+        },
+        {
+          "text": "네 밭이 뭐 대수라고.",
+          "next": "angry_response",
+          "flags": { "flag_met_torren": true, "reputation_twoeye": -2 }
+        }
+      ]
+    }
+  }
+}

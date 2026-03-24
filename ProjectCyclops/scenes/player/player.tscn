@@ -6,6 +6,8 @@
 size = Vector2(48, 48)
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 1
+collision_mask = 13
 script = ExtResource("1_player")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -16,5 +18,4 @@ shape = SubResource("RectangleShape2D_player")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position_smoothing_enabled = true
-position_smoothing_speed = 8.0
+process_callback = 0

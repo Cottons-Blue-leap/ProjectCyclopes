@@ -1,0 +1,47 @@
+{
+  "dialogue_id": "trade_twoeye_03",
+  "lines": [
+    {
+      "id": "start_first",
+      "speaker": "여관주인 Orren",
+      "text": "어서 와. 외눈박이든 뭐든, 돈 있으면 손님이야.",
+      "next": "choice_first",
+      "conditions": { "flag_met_orren": false }
+    },
+    {
+      "id": "start_return",
+      "speaker": "여관주인 Orren",
+      "text": "다시 왔군. 방이 필요하면 말해.",
+      "next": "",
+      "conditions": { "flag_met_orren": true }
+    },
+    {
+      "id": "stay_response",
+      "speaker": "여관주인 Orren",
+      "text": "좋아. 2층 끝방 써. 다른 손님들이랑 문제 일으키지는 마.",
+      "next": ""
+    },
+    {
+      "id": "info_response",
+      "speaker": "여관주인 Orren",
+      "text": "이 도시? 교역 중심지지. 사방에서 상인들이 와. 외눈박이는... 좀 드물긴 하지만.",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "쉴 곳이 필요해.",
+          "next": "stay_response",
+          "flags": { "flag_met_orren": true, "reputation_twoeye": 1 }
+        },
+        {
+          "text": "이 도시에 대해 알려줘.",
+          "next": "info_response",
+          "flags": { "flag_met_orren": true }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "dialogue_id": "trade_hostile_05",
+  "lines": [
+    {
+      "id": "start_return",
+      "speaker": "차별주의자",
+      "text": "...아직도 도시에 있었어. 끈기 하나는 인정해 주지.",
+      "next": "",
+      "conditions": { "flag_met_trade_hostile_05": true }
+    },
+    {
+      "id": "start",
+      "speaker": "차별주의자",
+      "text": "외눈박이가 시장 골목을 돌아다니면 장사가 안 돼. 저리 가.",
+      "next": "choice_first"
+    },
+    {
+      "id": "comply_response",
+      "speaker": "차별주의자",
+      "text": "그래, 외눈박이는 뒷골목이 어울려.",
+      "next": ""
+    },
+    {
+      "id": "stand_response",
+      "speaker": "차별주의자",
+      "text": "골목이 네 거라고?! 이 건방진—!",
+      "next": "stand_followup"
+    },
+    {
+      "id": "stand_followup",
+      "speaker": "차별주의자",
+      "text": "시장에서 외눈박이를 쫓아내는 건 우리의 권리야!",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "...알겠어.",
+          "next": "comply_response",
+          "flags": { "flag_met_trade_hostile_05": true }
+        },
+        {
+          "text": "이 골목이 네 이름이라도 적혀있어?",
+          "next": "stand_response",
+          "flags": { "flag_met_trade_hostile_05": true, "flag_trade_hostile_05_aggro": true, "reputation_twoeye": -1 }
+        }
+      ]
+    }
+  }
+}

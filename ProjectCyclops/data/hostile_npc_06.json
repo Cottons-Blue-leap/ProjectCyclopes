@@ -1,0 +1,52 @@
+{
+  "dialogue_id": "hostile_06",
+  "lines": [
+    {
+      "id": "start_return",
+      "speaker": "차별주의자",
+      "text": "...아직 안 떠났어? 끈질기긴.",
+      "next": "",
+      "conditions": { "flag_met_hostile_06": true }
+    },
+    {
+      "id": "start",
+      "speaker": "차별주의자",
+      "text": "외눈박이라... 부모님이 불쌍하겠다. 절반밖에 못 보는 자식이라니.",
+      "next": "choice_first"
+    },
+    {
+      "id": "restrain_response",
+      "speaker": "차별주의자",
+      "text": "흥, 참는 척은 잘하네. 꼬리 내리고 가라.",
+      "next": ""
+    },
+    {
+      "id": "rage_response",
+      "speaker": "차별주의자",
+      "text": "아야?! 이 외눈박이가 진짜—!",
+      "next": "rage_followup"
+    },
+    {
+      "id": "rage_followup",
+      "speaker": "차별주의자",
+      "text": "후회하게 해 줄게!",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "...참는다.",
+          "next": "restrain_response",
+          "flags": { "flag_met_hostile_06": true }
+        },
+        {
+          "text": "부모님 얘기는 하지 마.",
+          "next": "rage_response",
+          "flags": { "flag_met_hostile_06": true, "flag_hostile_06_aggro": true, "reputation_twoeye": -2 }
+        }
+      ]
+    }
+  }
+}

@@ -85,13 +85,21 @@ func _on_load() -> void:
 
 	var target_scene: String = player_data.get("scene", "")
 	if target_scene != "":
+		GameManager.change_state(GameManager.GameState.TRANSITION)
 		get_tree().change_scene_to_file(target_scene)
-		# 씬 로드 후 플레이어 위치/체력 복원
-		await get_tree().tree_changed
-		var player := get_tree().get_first_node_in_group("player")
+		# 씬 로드 완료 대기
+		await get_tree().create_timer(0.2).timeout
+		# 플레이어가 준비될 때까지 재시도
+		var player: CharacterBody2D = null
+		for i in range(10):
+			player = get_tree().get_first_node_in_group("player") as CharacterBody2D
+			if player != null:
+				break
+			await get_tree().process_frame
 		if player:
 			player.global_position = Vector2(
-				player_data.get("position_x", 640),
-				player_data.get("position_y", 360)
+				float(player_data.get("position_x", 640)),
+				float(player_data.get("position_y", 360))
 			)
 			player.current_hearts = int(player_data.get("current_hearts", player.max_hearts))
+		GameManager.change_state(GameManager.GameState.EXPLORE)

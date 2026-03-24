@@ -1,0 +1,65 @@
+{
+  "dialogue_id": "villager_03",
+  "lines": [
+    {
+      "id": "start_first",
+      "speaker": "대장장이 Bran",
+      "text": "...외눈박이? 대장간에 볼일이 있나?",
+      "next": "choice_first",
+      "conditions": { "flag_met_bran": false }
+    },
+    {
+      "id": "start_friendly",
+      "speaker": "대장장이 Bran",
+      "text": "오, 아까 그 친구. 무기가 필요하면 말해.",
+      "next": "",
+      "conditions": { "flag_met_bran": true, "reputation_twoeye": 1 }
+    },
+    {
+      "id": "start_neutral",
+      "speaker": "대장장이 Bran",
+      "text": "...또 왔어? 뭐 필요한 거라도?",
+      "next": "",
+      "conditions": { "flag_met_bran": true }
+    },
+    {
+      "id": "polite_response",
+      "speaker": "대장장이 Bran",
+      "text": "그래? 눈이 하나든 둘이든, 돈 내고 사면 손님이지. 구경해.",
+      "next": ""
+    },
+    {
+      "id": "rude_response",
+      "speaker": "대장장이 Bran",
+      "text": "흥. 외눈박이한테 팔 칼은 없어. 꺼져.",
+      "next": ""
+    },
+    {
+      "id": "curious_response",
+      "speaker": "대장장이 Bran",
+      "text": "대장장이 일? 할아버지 때부터 했지. ...외눈박이가 관심을 가지다니, 좀 신기하네.",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "좋은 무기가 있다면 구경 좀 하려고.",
+          "next": "polite_response",
+          "flags": { "flag_met_bran": true, "reputation_twoeye": 1 }
+        },
+        {
+          "text": "네가 상관할 바 아니야.",
+          "next": "rude_response",
+          "flags": { "flag_met_bran": true, "reputation_twoeye": -1 }
+        },
+        {
+          "text": "대장장이 일은 오래 했어?",
+          "next": "curious_response",
+          "flags": { "flag_met_bran": true }
+        }
+      ]
+    }
+  }
+}

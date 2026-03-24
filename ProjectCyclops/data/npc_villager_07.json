@@ -1,0 +1,60 @@
+{
+  "dialogue_id": "villager_07",
+  "lines": [
+    {
+      "id": "start_first",
+      "speaker": "노인 Grenn",
+      "text": "허... 외눈박이를 보다니. 옛날에는 외눈박이가 이 마을에도 살았는데.",
+      "next": "choice_first",
+      "conditions": { "flag_met_grenn": false }
+    },
+    {
+      "id": "start_friendly",
+      "speaker": "노인 Grenn",
+      "text": "다시 왔구나, 젊은이. 옛 이야기가 더 듣고 싶으면 말해.",
+      "next": "",
+      "conditions": { "flag_met_grenn": true, "reputation_twoeye": 1 }
+    },
+    {
+      "id": "start_neutral",
+      "speaker": "노인 Grenn",
+      "text": "...또 왔나. 이 늙은이한테 볼일은 없겠지.",
+      "next": "",
+      "conditions": { "flag_met_grenn": true }
+    },
+    {
+      "id": "listen_response",
+      "speaker": "노인 Grenn",
+      "text": "예전에는 눈의 수가 달라도 어울려 살았지. 언제부터 이렇게 됐는지... 기억도 안 나.",
+      "next": "listen_followup"
+    },
+    {
+      "id": "listen_followup",
+      "speaker": "노인 Grenn",
+      "text": "...자네 같은 젊은이가 있으면, 언젠가 다시 그런 날이 올지도 모르지.",
+      "next": ""
+    },
+    {
+      "id": "dismiss_response",
+      "speaker": "노인 Grenn",
+      "text": "흐음... 그래, 옛날이야기에 관심 없는 건 당연하지.",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "...그 이야기, 더 들려주세요.",
+          "next": "listen_response",
+          "flags": { "flag_met_grenn": true, "reputation_twoeye": 2 }
+        },
+        {
+          "text": "옛날이야기에는 관심 없어.",
+          "next": "dismiss_response",
+          "flags": { "flag_met_grenn": true }
+        }
+      ]
+    }
+  }
+}

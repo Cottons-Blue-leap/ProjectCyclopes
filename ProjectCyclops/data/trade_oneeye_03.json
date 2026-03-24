@@ -1,0 +1,53 @@
+{
+  "dialogue_id": "trade_oneeye_03",
+  "lines": [
+    {
+      "id": "start_first",
+      "speaker": "음유시인 Fael",
+      "text": "오, 동족! 반가워. 외눈박이끼리 이런 데서 만나다니.",
+      "next": "choice_first",
+      "conditions": { "flag_met_fael": false }
+    },
+    {
+      "id": "start_return",
+      "speaker": "음유시인 Fael",
+      "text": "다시 왔네! 노래 한 곡 들려줄까?",
+      "next": "",
+      "conditions": { "flag_met_fael": true }
+    },
+    {
+      "id": "warm_response",
+      "speaker": "음유시인 Fael",
+      "text": "여행하면서 노래를 모으고 있어. 여기 쌍눈박이들? 대부분은 괜찮아. 일부만 조심하면 돼.",
+      "next": "warm_followup"
+    },
+    {
+      "id": "warm_followup",
+      "speaker": "음유시인 Fael",
+      "text": "혼자 다니면 위험할 수 있어. 조심해, 동족.",
+      "next": ""
+    },
+    {
+      "id": "cold_response",
+      "speaker": "음유시인 Fael",
+      "text": "...그래? 뭐, 동족이라고 다 친할 필요는 없지. 조심해서 다녀.",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "나도 반가워. 여기서 뭐 하고 있어?",
+          "next": "warm_response",
+          "flags": { "flag_met_fael": true, "reputation_oneeye": 1 }
+        },
+        {
+          "text": "동족이라고 다 같은 편은 아니야.",
+          "next": "cold_response",
+          "flags": { "flag_met_fael": true }
+        }
+      ]
+    }
+  }
+}

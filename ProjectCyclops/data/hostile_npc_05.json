@@ -1,0 +1,52 @@
+{
+  "dialogue_id": "hostile_05",
+  "lines": [
+    {
+      "id": "start_return",
+      "speaker": "차별주의자",
+      "text": "또 마주치다니. 운이 없는 건 누구 쪽이지?",
+      "next": "",
+      "conditions": { "flag_met_hostile_05": true }
+    },
+    {
+      "id": "start",
+      "speaker": "차별주의자",
+      "text": "어이, 외눈박이. 여기가 어디라고 어슬렁거려?",
+      "next": "choice_first"
+    },
+    {
+      "id": "ignore_response",
+      "speaker": "차별주의자",
+      "text": "무시해? ...쯧, 건방진 것.",
+      "next": ""
+    },
+    {
+      "id": "provoke_response",
+      "speaker": "차별주의자",
+      "text": "뭐라고?! 감히—!",
+      "next": "provoke_followup"
+    },
+    {
+      "id": "provoke_followup",
+      "speaker": "차별주의자",
+      "text": "좋아, 주먹으로 가르쳐 주지!",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "(무시하고 지나간다)",
+          "next": "ignore_response",
+          "flags": { "flag_met_hostile_05": true }
+        },
+        {
+          "text": "내가 어슬렁거리든 말든 네 알 바 아니지.",
+          "next": "provoke_response",
+          "flags": { "flag_met_hostile_05": true, "flag_hostile_05_aggro": true, "reputation_twoeye": -1 }
+        }
+      ]
+    }
+  }
+}

@@ -30,6 +30,7 @@ var hit_flash_timer: float = 0.0
 var is_hit: bool = false
 var has_talked: bool = false
 var became_hostile: bool = false
+var facing_direction: Vector2 = Vector2.DOWN
 
 
 func _ready() -> void:
@@ -82,6 +83,8 @@ func _physics_process(delta: float) -> void:
 			_state_wander(delta)
 		State.TALK_RANGE:
 			velocity = Vector2.ZERO
+			if player != null:
+				facing_direction = (player.global_position - global_position).normalized()
 		State.IN_DIALOGUE:
 			velocity = Vector2.ZERO
 		State.COMBAT_CHASE:
@@ -163,6 +166,7 @@ func _state_idle(delta: float) -> void:
 ## 배회
 func _state_wander(delta: float) -> void:
 	velocity = wander_direction * move_speed
+	facing_direction = wander_direction
 	wander_timer -= delta
 	if wander_timer <= 0:
 		state = State.IDLE
@@ -184,6 +188,7 @@ func _state_combat_chase() -> void:
 
 	var dir := (player.global_position - global_position).normalized()
 	velocity = dir * chase_speed
+	facing_direction = dir
 
 	if _player_in_range(attack_range):
 		state = State.COMBAT_WINDUP
@@ -294,11 +299,12 @@ func _draw() -> void:
 
 	draw_rect(Rect2(-24, -24, 48, 48), body_color)
 
-	# 눈 2개
-	draw_circle(Vector2(-8, -8), 6.0, Color.WHITE)
-	draw_circle(Vector2(8, -8), 6.0, Color.WHITE)
-	draw_circle(Vector2(-8, -8), 3.0, Color(0.1, 0.1, 0.1))
-	draw_circle(Vector2(8, -8), 3.0, Color(0.1, 0.1, 0.1))
+	# 눈 2개 — 바라보는 방향에 따라 오프셋
+	var eye_off := facing_direction * 4.0
+	draw_circle(Vector2(-8 + eye_off.x, -8 + eye_off.y), 6.0, Color.WHITE)
+	draw_circle(Vector2(8 + eye_off.x, -8 + eye_off.y), 6.0, Color.WHITE)
+	draw_circle(Vector2(-8 + eye_off.x, -8 + eye_off.y), 3.0, Color(0.1, 0.1, 0.1))
+	draw_circle(Vector2(8 + eye_off.x, -8 + eye_off.y), 3.0, Color(0.1, 0.1, 0.1))
 
 	# 대화 가능 표시
 	if player_in_range and not became_hostile and GameManager.is_state(GameManager.GameState.EXPLORE):

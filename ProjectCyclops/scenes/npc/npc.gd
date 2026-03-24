@@ -9,6 +9,7 @@ extends CharacterBody2D
 var player: CharacterBody2D = null
 var player_in_range: bool = false
 var dialogue_box: Node = null
+var facing_direction: Vector2 = Vector2.DOWN
 
 
 func _ready() -> void:
@@ -52,6 +53,17 @@ func _start_dialogue() -> void:
 	dialogue_box.start(data)
 
 
+func _process(_delta: float) -> void:
+	if player_in_range and player != null:
+		var dir := (player.global_position - global_position).normalized()
+		# 4방향으로 스냅
+		if abs(dir.x) >= abs(dir.y):
+			facing_direction = Vector2(sign(dir.x), 0)
+		else:
+			facing_direction = Vector2(0, sign(dir.y))
+		queue_redraw()
+
+
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		player = body
@@ -68,13 +80,13 @@ func _on_body_exited(body: Node2D) -> void:
 ## 플레이스홀더 그리기 — 쌍눈박이 NPC
 func _draw() -> void:
 	# 몸통
-	var body_rect := Rect2(-24, -24, 48, 48)
-	draw_rect(body_rect, Color(0.4, 0.5, 0.7))
-	# 눈 2개
-	draw_circle(Vector2(-8, -8), 6.0, Color.WHITE)
-	draw_circle(Vector2(8, -8), 6.0, Color.WHITE)
-	draw_circle(Vector2(-8, -8), 3.0, Color(0.1, 0.1, 0.1))
-	draw_circle(Vector2(8, -8), 3.0, Color(0.1, 0.1, 0.1))
+	draw_rect(Rect2(-24, -24, 48, 48), Color(0.4, 0.5, 0.7))
+	# 눈 2개 — 바라보는 방향에 따라 오프셋
+	var eye_off := facing_direction * 4.0
+	draw_circle(Vector2(-8 + eye_off.x, -8 + eye_off.y), 6.0, Color.WHITE)
+	draw_circle(Vector2(8 + eye_off.x, -8 + eye_off.y), 6.0, Color.WHITE)
+	draw_circle(Vector2(-8 + eye_off.x, -8 + eye_off.y), 3.0, Color(0.1, 0.1, 0.1))
+	draw_circle(Vector2(8 + eye_off.x, -8 + eye_off.y), 3.0, Color(0.1, 0.1, 0.1))
 	# 상호작용 가능 표시
 	if player_in_range and GameManager.is_state(GameManager.GameState.EXPLORE):
 		draw_circle(Vector2(0, -48), 8.0, Color(1, 1, 0.5, 0.8))

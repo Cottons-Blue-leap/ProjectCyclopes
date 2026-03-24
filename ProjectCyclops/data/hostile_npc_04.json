@@ -1,0 +1,52 @@
+{
+  "dialogue_id": "hostile_04",
+  "lines": [
+    {
+      "id": "start_return",
+      "speaker": "차별주의자",
+      "text": "...어디서 본 외눈박이인데. 아직도 살아있었어?",
+      "next": "",
+      "conditions": { "flag_met_hostile_04": true }
+    },
+    {
+      "id": "start",
+      "speaker": "차별주의자",
+      "text": "잠깐. 너... 눈이 하나잖아. 여기 올 자격이 없어.",
+      "next": "choice_first"
+    },
+    {
+      "id": "submit_response",
+      "speaker": "차별주의자",
+      "text": "그래, 알아서 비켜. 외눈박이가 분수를 아는 건 좋은 거야.",
+      "next": ""
+    },
+    {
+      "id": "fight_response",
+      "speaker": "차별주의자",
+      "text": "자격? 네가 정해?! 웃기지도 않아!",
+      "next": "fight_followup"
+    },
+    {
+      "id": "fight_followup",
+      "speaker": "차별주의자",
+      "text": "...좋아, 힘으로 보여줄게. 왜 외눈박이는 여기 올 수 없는지!",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "...알겠어. 비킬게.",
+          "next": "submit_response",
+          "flags": { "flag_met_hostile_04": true }
+        },
+        {
+          "text": "자격은 네가 정하는 게 아니야.",
+          "next": "fight_response",
+          "flags": { "flag_met_hostile_04": true, "flag_hostile_04_aggro": true, "reputation_twoeye": -2 }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "dialogue_id": "trade_hostile_01",
+  "lines": [
+    {
+      "id": "start_return",
+      "speaker": "차별주의자",
+      "text": "...이 교역도시에서까지 날 따라다녀?",
+      "next": "",
+      "conditions": { "flag_met_trade_hostile_01": true }
+    },
+    {
+      "id": "start",
+      "speaker": "차별주의자",
+      "text": "뭐야, 외눈박이가 교역도시에? 장사라도 하겠다는 거야?",
+      "next": "choice_first"
+    },
+    {
+      "id": "avoid_response",
+      "speaker": "차별주의자",
+      "text": "그래, 외눈박이는 조용히 숨어 살아야지.",
+      "next": ""
+    },
+    {
+      "id": "fight_response",
+      "speaker": "차별주의자",
+      "text": "뭐? 장사를 하겠다고?! 외눈박이가 시장에서?!",
+      "next": "fight_followup"
+    },
+    {
+      "id": "fight_followup",
+      "speaker": "차별주의자",
+      "text": "두 눈 가진 상인들의 자리를 외눈박이가 뺏게 놔둘 수 없지!",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "구경하러 온 것뿐이야.",
+          "next": "avoid_response",
+          "flags": { "flag_met_trade_hostile_01": true }
+        },
+        {
+          "text": "장사가 뭐 어때서?",
+          "next": "fight_response",
+          "flags": { "flag_met_trade_hostile_01": true, "flag_trade_hostile_01_aggro": true, "reputation_twoeye": -2 }
+        }
+      ]
+    }
+  }
+}

@@ -9,6 +9,7 @@ extends CanvasLayer
 @onready var advance_indicator: Label = $Panel/MarginContainer/VBoxContainer/AdvanceIndicator
 
 const CHAR_DELAY: float = 0.03  # 타이핑 효과 속도
+const ADVANCE_COOLDOWN: float = 0.4  # 대사 표시 후 최소 대기 시간
 
 var dialogue_data: Dictionary = {}
 var current_lines: Array = []
@@ -19,6 +20,7 @@ var is_showing_choices: bool = false
 var typing_tween: Tween = null
 var selected_choice: int = 0
 var choice_buttons: Array = []
+var advance_cooldown_timer: float = 0.0
 
 
 func _ready() -> void:
@@ -26,6 +28,11 @@ func _ready() -> void:
 	advance_indicator.visible = false
 	_clear_choices()
 	add_to_group("dialogue_box")
+
+
+func _process(delta: float) -> void:
+	if advance_cooldown_timer > 0:
+		advance_cooldown_timer -= delta
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -36,12 +43,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		_handle_choice_input(event)
 		return
 
-	if is_typing and (event.is_action_pressed("dialogue_advance") or event.is_action_pressed("interact")):
+	var is_advance := event.is_action_pressed("dialogue_advance") or event.is_action_pressed("interact") or event.is_action_pressed("attack")
+
+	if is_typing and is_advance:
 		# 타이핑 중 스킵 → 전체 표시
 		_skip_typing()
 		get_viewport().set_input_as_handled()
-	elif is_waiting_for_input and (event.is_action_pressed("dialogue_advance") or event.is_action_pressed("interact")):
-		# 다음 대사로
+	elif is_waiting_for_input and is_advance and advance_cooldown_timer <= 0:
+		# 다음 대사로 (쿨다운 지난 후에만)
 		_advance()
 		get_viewport().set_input_as_handled()
 
@@ -91,6 +100,7 @@ func _show_current_line() -> void:
 
 func _on_typing_finished(line: Dictionary) -> void:
 	is_typing = false
+	advance_cooldown_timer = ADVANCE_COOLDOWN
 
 	# 다음이 선택지인지 확인
 	var next_id: String = line.get("next", "")
@@ -106,6 +116,7 @@ func _skip_typing() -> void:
 		typing_tween.kill()
 	text_label.visible_ratio = 1.0
 	is_typing = false
+	advance_cooldown_timer = ADVANCE_COOLDOWN
 
 	var line: Dictionary = current_lines[current_line_index]
 	var next_id: String = line.get("next", "")
@@ -164,6 +175,19 @@ func _show_choices(choice_data: Dictionary) -> void:
 
 
 func _handle_choice_input(event: InputEvent) -> void:
+	# 마우스 스크롤로 선택지 이동
+	if event is InputEventMouseButton:
+		if event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			selected_choice = max(0, selected_choice - 1)
+			_update_choice_highlight()
+			get_viewport().set_input_as_handled()
+			return
+		elif event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			selected_choice = min(choice_buttons.size() - 1, selected_choice + 1)
+			_update_choice_highlight()
+			get_viewport().set_input_as_handled()
+			return
+
 	if event.is_action_pressed("move_up"):
 		selected_choice = max(0, selected_choice - 1)
 		_update_choice_highlight()
@@ -172,7 +196,7 @@ func _handle_choice_input(event: InputEvent) -> void:
 		selected_choice = min(choice_buttons.size() - 1, selected_choice + 1)
 		_update_choice_highlight()
 		get_viewport().set_input_as_handled()
-	elif event.is_action_pressed("interact") or event.is_action_pressed("dialogue_advance"):
+	elif event.is_action_pressed("interact") or event.is_action_pressed("dialogue_advance") or event.is_action_pressed("attack"):
 		_select_choice()
 		get_viewport().set_input_as_handled()
 

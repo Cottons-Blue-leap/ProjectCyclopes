@@ -1,0 +1,52 @@
+{
+  "dialogue_id": "trade_hostile_02",
+  "lines": [
+    {
+      "id": "start_return",
+      "speaker": "차별주의자",
+      "text": "...아직도 이 도시에 있었어?",
+      "next": "",
+      "conditions": { "flag_met_trade_hostile_02": true }
+    },
+    {
+      "id": "start",
+      "speaker": "차별주의자",
+      "text": "이 구역은 내가 관리하는 데야. 외눈박이는 통행료를 내야 해.",
+      "next": "choice_first"
+    },
+    {
+      "id": "pay_response",
+      "speaker": "차별주의자",
+      "text": "...돈이 없어? 그럼 빨리 꺼져. 다음엔 공짜로 안 봐줘.",
+      "next": ""
+    },
+    {
+      "id": "refuse_response",
+      "speaker": "차별주의자",
+      "text": "통행료를 안 내겠다고?!",
+      "next": "refuse_followup"
+    },
+    {
+      "id": "refuse_followup",
+      "speaker": "차별주의자",
+      "text": "그러면 몸으로 내야지!",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "...지금은 돈이 없어.",
+          "next": "pay_response",
+          "flags": { "flag_met_trade_hostile_02": true }
+        },
+        {
+          "text": "불법 통행료 따위 내지 않아.",
+          "next": "refuse_response",
+          "flags": { "flag_met_trade_hostile_02": true, "flag_trade_hostile_02_aggro": true, "reputation_twoeye": -1 }
+        }
+      ]
+    }
+  }
+}

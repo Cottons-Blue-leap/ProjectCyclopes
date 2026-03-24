@@ -8,6 +8,7 @@ extends CharacterBody2D
 
 var player: CharacterBody2D = null
 var player_in_range: bool = false
+var facing_direction: Vector2 = Vector2.DOWN
 
 
 func _ready() -> void:
@@ -46,6 +47,16 @@ func _start_dialogue() -> void:
 	dialogue_box.start(data)
 
 
+func _process(_delta: float) -> void:
+	if player_in_range and player != null:
+		var dir := (player.global_position - global_position).normalized()
+		if abs(dir.x) >= abs(dir.y):
+			facing_direction = Vector2(sign(dir.x), 0)
+		else:
+			facing_direction = Vector2(0, sign(dir.y))
+		queue_redraw()
+
+
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		player = body
@@ -63,9 +74,10 @@ func _on_body_exited(body: Node2D) -> void:
 func _draw() -> void:
 	# 몸통 — 따뜻한 톤
 	draw_rect(Rect2(-24, -24, 48, 48), Color(0.7, 0.55, 0.4))
-	# 눈 하나 (중앙)
-	draw_circle(Vector2(0, -8), 7.0, Color.WHITE)
-	draw_circle(Vector2(0, -8), 3.5, Color(0.15, 0.15, 0.15))
+	# 눈 하나 — 바라보는 방향에 따라 오프셋
+	var eye_off := facing_direction * 5.0
+	draw_circle(Vector2(eye_off.x, -8 + eye_off.y), 7.0, Color.WHITE)
+	draw_circle(Vector2(eye_off.x, -8 + eye_off.y), 3.5, Color(0.15, 0.15, 0.15))
 	# 상호작용 가능 표시
 	if player_in_range and GameManager.is_state(GameManager.GameState.EXPLORE):
 		draw_circle(Vector2(0, -48), 8.0, Color(1, 1, 0.5, 0.8))

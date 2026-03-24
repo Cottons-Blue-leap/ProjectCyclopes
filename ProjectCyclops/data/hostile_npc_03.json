@@ -1,0 +1,52 @@
+{
+  "dialogue_id": "hostile_03",
+  "lines": [
+    {
+      "id": "start_return",
+      "speaker": "차별주의자",
+      "text": "...또 기어왔어? 아직도 정신을 못 차렸구나.",
+      "next": "",
+      "conditions": { "flag_met_hostile_03": true }
+    },
+    {
+      "id": "start",
+      "speaker": "차별주의자",
+      "text": "이 동네에 외눈박이 냄새가 나더라니. 네 놈이었어?",
+      "next": "choice_first"
+    },
+    {
+      "id": "calm_response",
+      "speaker": "차별주의자",
+      "text": "도망? 그래, 그게 외눈박이답지. 꺼져.",
+      "next": ""
+    },
+    {
+      "id": "hostile_response",
+      "speaker": "차별주의자",
+      "text": "하! 외눈박이가 말대꾸를?",
+      "next": "hostile_followup"
+    },
+    {
+      "id": "hostile_followup",
+      "speaker": "차별주의자",
+      "text": "좋아... 그 남은 눈 하나도 감겨 줄게!",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "상관하지 마, 지나갈 뿐이야.",
+          "next": "calm_response",
+          "flags": { "flag_met_hostile_03": true }
+        },
+        {
+          "text": "냄새? 쌍눈박이 오만함 냄새가 더 독하던데.",
+          "next": "hostile_response",
+          "flags": { "flag_met_hostile_03": true, "flag_hostile_03_aggro": true, "reputation_twoeye": -2 }
+        }
+      ]
+    }
+  }
+}

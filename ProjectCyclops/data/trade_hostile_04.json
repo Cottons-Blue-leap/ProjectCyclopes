@@ -1,0 +1,52 @@
+{
+  "dialogue_id": "trade_hostile_04",
+  "lines": [
+    {
+      "id": "start_return",
+      "speaker": "차별주의자",
+      "text": "...질리지도 않나. 또 왔어?",
+      "next": "",
+      "conditions": { "flag_met_trade_hostile_04": true }
+    },
+    {
+      "id": "start",
+      "speaker": "차별주의자",
+      "text": "우리 가문은 대대로 쌍눈박이 순혈이야. 외눈박이 따위와 같은 공기를 마시기 싫거든.",
+      "next": "choice_first"
+    },
+    {
+      "id": "ignore_response",
+      "speaker": "차별주의자",
+      "text": "돌아가? 현명한 선택이야. 외눈박이도 배우는 건 있나 보군.",
+      "next": ""
+    },
+    {
+      "id": "mock_response",
+      "speaker": "차별주의자",
+      "text": "뭐라고?! 순혈을 모독하다니!",
+      "next": "mock_followup"
+    },
+    {
+      "id": "mock_followup",
+      "speaker": "차별주의자",
+      "text": "가문의 이름으로 혼내주마!",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "(조용히 돌아간다)",
+          "next": "ignore_response",
+          "flags": { "flag_met_trade_hostile_04": true }
+        },
+        {
+          "text": "순혈? 그래서 뇌도 순수하게 비어있나 보네.",
+          "next": "mock_response",
+          "flags": { "flag_met_trade_hostile_04": true, "flag_trade_hostile_04_aggro": true, "reputation_twoeye": -2 }
+        }
+      ]
+    }
+  }
+}

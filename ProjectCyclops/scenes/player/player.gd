@@ -1,8 +1,12 @@
 extends CharacterBody2D
 
-## 플레이어 캐릭터 — 4방향 이동 + 마우스 기반 공격 방향
+## 플레이어 캐릭터 — 8방향 이동 + 마우스 기반 공격 방향
 
 @export var move_speed: float = 320.0
+@export var sprint_speed: float = 520.0
+@export var sprint_cost: float = 20.0  ## 초당 스태미나 소모
+@export var acceleration: float = 1600.0
+@export var friction: float = 1200.0
 @export var dodge_speed: float = 800.0
 @export var dodge_duration: float = 0.3
 @export var max_stamina: float = 100.0
@@ -134,7 +138,7 @@ func _physics_process(delta: float) -> void:
 	queue_redraw()
 
 
-## 이동 처리 (4방향)
+## 이동 처리 (8방향, 가감속 보간, Shift 달리기)
 func _handle_movement() -> void:
 	var input_dir := Vector2.ZERO
 	if Input.is_action_pressed("move_up"):
@@ -146,15 +150,19 @@ func _handle_movement() -> void:
 	if Input.is_action_pressed("move_right"):
 		input_dir.x += 1
 
-	if input_dir != Vector2.ZERO:
-		# 4방향 제한: 가장 큰 축만 사용
-		if abs(input_dir.x) >= abs(input_dir.y):
-			input_dir = Vector2(sign(input_dir.x), 0)
-		else:
-			input_dir = Vector2(0, sign(input_dir.y))
-		facing_direction = input_dir
+	var delta := get_physics_process_delta_time()
+	var is_sprinting := Input.is_action_pressed("sprint") and stamina > 0 and input_dir != Vector2.ZERO
+	var current_speed := sprint_speed if is_sprinting else move_speed
 
-	velocity = input_dir * move_speed
+	if is_sprinting:
+		stamina -= sprint_cost * delta
+
+	if input_dir != Vector2.ZERO:
+		input_dir = input_dir.normalized()
+		facing_direction = input_dir
+		velocity = velocity.move_toward(input_dir * current_speed, acceleration * delta)
+	else:
+		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 
 
 ## 마우스 커서 기준 공격 방향 계산
@@ -221,9 +229,10 @@ func _perform_attack() -> void:
 	is_attacking = false
 
 
-## 스태미나 자연 회복
+## 스태미나 자연 회복 (달리기 중 회복 안 함)
 func _update_stamina(delta: float) -> void:
-	if not is_dodging and not is_parrying:
+	var is_sprinting := Input.is_action_pressed("sprint") and velocity.length() > move_speed * 0.5
+	if not is_dodging and not is_parrying and not is_sprinting:
 		stamina = min(stamina + stamina_regen * delta, max_stamina)
 
 
@@ -298,12 +307,14 @@ func _die() -> void:
 	global_position = Vector2(640, 360)
 
 
-## 카메라 — 전투 시 고정, 탐색 시 추적
+## 카메라 — 전투 시 offset으로 고정, 탐색 시 자동 추적
+## Camera2D는 플레이어 자식 + process_callback=PHYSICS → position 건드리지 않음
+## offset만 조정하여 전투 시 카메라 중심 이동
 func _update_camera() -> void:
 	if camera_locked:
-		camera.global_position = camera_lock_position
+		camera.offset = camera_lock_position - global_position
 	else:
-		camera.global_position = global_position
+		camera.offset = Vector2.ZERO
 
 
 func lock_camera(pos: Vector2) -> void:

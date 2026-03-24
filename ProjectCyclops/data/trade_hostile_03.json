@@ -1,0 +1,52 @@
+{
+  "dialogue_id": "trade_hostile_03",
+  "lines": [
+    {
+      "id": "start_return",
+      "speaker": "차별주의자",
+      "text": "또 보는군. 끈질긴 외눈박이야.",
+      "next": "",
+      "conditions": { "flag_met_trade_hostile_03": true }
+    },
+    {
+      "id": "start",
+      "speaker": "차별주의자",
+      "text": "외눈박이가 여관 근처를 어슬렁거리면 곤란해. 손님들이 무서워하거든.",
+      "next": "choice_first"
+    },
+    {
+      "id": "leave_response",
+      "speaker": "차별주의자",
+      "text": "알아서 비키는 건 좋은 태도야.",
+      "next": ""
+    },
+    {
+      "id": "confront_response",
+      "speaker": "차별주의자",
+      "text": "무서운 건 너라고? 하! 외눈박이가 건방지게!",
+      "next": "confront_followup"
+    },
+    {
+      "id": "confront_followup",
+      "speaker": "차별주의자",
+      "text": "좋아, 누가 무서운지 보여줄게!",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "알겠어, 비킬게.",
+          "next": "leave_response",
+          "flags": { "flag_met_trade_hostile_03": true }
+        },
+        {
+          "text": "무서운 건 네 편견 아닐까?",
+          "next": "confront_response",
+          "flags": { "flag_met_trade_hostile_03": true, "flag_trade_hostile_03_aggro": true, "reputation_twoeye": -2 }
+        }
+      ]
+    }
+  }
+}

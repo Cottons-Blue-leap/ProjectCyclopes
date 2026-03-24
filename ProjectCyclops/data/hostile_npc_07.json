@@ -1,0 +1,52 @@
+{
+  "dialogue_id": "hostile_07",
+  "lines": [
+    {
+      "id": "start_return",
+      "speaker": "차별주의자",
+      "text": "또 만났네. 이번에도 도망칠 거야?",
+      "next": "",
+      "conditions": { "flag_met_hostile_07": true }
+    },
+    {
+      "id": "start",
+      "speaker": "차별주의자",
+      "text": "이봐, 외눈박이. 이 길은 쌍눈박이 전용이야. 돌아가.",
+      "next": "choice_first"
+    },
+    {
+      "id": "detour_response",
+      "speaker": "차별주의자",
+      "text": "순순히 돌아가다니, 제법 영리한 외눈박이네.",
+      "next": ""
+    },
+    {
+      "id": "defy_response",
+      "speaker": "차별주의자",
+      "text": "뭐? 길에도 눈이 있냐고?",
+      "next": "defy_followup"
+    },
+    {
+      "id": "defy_followup",
+      "speaker": "차별주의자",
+      "text": "...재미있는 놈이군. 그 유머 감각, 주먹으로 고쳐줄게.",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "...알겠어, 돌아갈게.",
+          "next": "detour_response",
+          "flags": { "flag_met_hostile_07": true }
+        },
+        {
+          "text": "길에 눈이 몇 개 달렸는데?",
+          "next": "defy_response",
+          "flags": { "flag_met_hostile_07": true, "flag_hostile_07_aggro": true, "reputation_twoeye": -1 }
+        }
+      ]
+    }
+  }
+}

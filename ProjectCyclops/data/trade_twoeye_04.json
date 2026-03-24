@@ -1,0 +1,47 @@
+{
+  "dialogue_id": "trade_twoeye_04",
+  "lines": [
+    {
+      "id": "start_first",
+      "speaker": "선원 Koss",
+      "text": "흠? 외눈박이가 항구 쪽까지 왔네. 배 탈 일 있어?",
+      "next": "choice_first",
+      "conditions": { "flag_met_koss": false }
+    },
+    {
+      "id": "start_return",
+      "speaker": "선원 Koss",
+      "text": "아, 아까 그 외눈박이. 바다 구경은 했어?",
+      "next": "",
+      "conditions": { "flag_met_koss": true }
+    },
+    {
+      "id": "sea_response",
+      "speaker": "선원 Koss",
+      "text": "바다에선 눈이 몇 개든 상관없어. 파도 앞에선 다 똑같지. 하하!",
+      "next": ""
+    },
+    {
+      "id": "trade_response",
+      "speaker": "선원 Koss",
+      "text": "교역? 남쪽에서 향신료, 북쪽에서 철을 실어 와. 바쁜 항구야.",
+      "next": ""
+    }
+  ],
+  "choices": {
+    "choice_first": {
+      "options": [
+        {
+          "text": "바다가 궁금해서.",
+          "next": "sea_response",
+          "flags": { "flag_met_koss": true, "reputation_twoeye": 1 }
+        },
+        {
+          "text": "어떤 교역을 하는 거야?",
+          "next": "trade_response",
+          "flags": { "flag_met_koss": true }
+        }
+      ]
+    }
+  }
+}
